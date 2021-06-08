@@ -1,6 +1,7 @@
 package com.aegerm.springsglbookstore.service;
 
 import com.aegerm.springsglbookstore.domain.Categoria;
+import com.aegerm.springsglbookstore.domain.dto.CategoriaDTO;
 import com.aegerm.springsglbookstore.repository.CategoriaRepository;
 import com.aegerm.springsglbookstore.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,14 @@ import java.util.Optional;
 public class CategoriaService {
 
     private final CategoriaRepository repository;
+
+    public Categoria atualizarCategoria(Long id, CategoriaDTO categoriaDTO) {
+        Categoria categoria = this.buscarCategoriaId(id);
+        categoria.setNome(categoriaDTO.getNome());
+        categoria.setDescricao(categoriaDTO.getDescricao());
+
+        return this.repository.save(categoria);
+    }
 
     public Categoria buscarCategoriaId(Long id) {
         Optional<Categoria> categoria = this.repository.findById(id);

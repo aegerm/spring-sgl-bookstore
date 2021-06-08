@@ -42,4 +42,10 @@ public class CategoriaRestService {
 
         return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable Long id, @RequestBody CategoriaDTO categoriaDTO) {
+        Categoria newCategoria = this.service.atualizarCategoria(id, categoriaDTO);
+        return ResponseEntity.ok().body(new CategoriaDTO(newCategoria));
+    }
 }
