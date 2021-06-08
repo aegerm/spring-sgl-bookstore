@@ -6,6 +6,7 @@ import com.aegerm.springsglbookstore.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,5 +18,9 @@ public class CategoriaService {
     public Categoria buscarCategoriaId(Long id) {
         Optional<Categoria> categoria = this.repository.findById(id);
         return categoria.orElseThrow(() -> new ObjectNotFoundException("Categoria não encontrada! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+    }
+
+    public List<Categoria> listarCategorias() {
+        return this.repository.findAll();
     }
 }
