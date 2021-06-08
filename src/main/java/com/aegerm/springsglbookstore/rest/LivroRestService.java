@@ -29,4 +29,16 @@ public class LivroRestService {
         List<LivroDTO> dtoList = livros.stream().map(LivroDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(dtoList);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Livro> atualizarLivro(@PathVariable Long id, @RequestBody Livro livro) {
+        Livro livroUpd = this.service.atualizarLivro(id, livro);
+        return ResponseEntity.ok().body(livroUpd);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Livro> atualizarLivroParcial(@PathVariable Long id, @RequestBody Livro livro) {
+        Livro livroUpd = this.service.atualizarLivro(id, livro);
+        return ResponseEntity.ok().body(livroUpd);
+    }
 }

@@ -25,4 +25,16 @@ public class LivroService {
         this.categoriaService.buscarCategoriaId(categoriaId);
         return this.repository.findAllByCategoria(categoriaId);
     }
+
+    public Livro atualizarLivro(Long id, Livro livro) {
+        Livro newLivro = this.buscarLivroId(id);
+        this.updateData(newLivro, livro);
+        return this.repository.save(newLivro);
+    }
+
+    private void updateData(Livro newLivro, Livro livro) {
+        newLivro.setTitulo(livro.getTitulo());
+        newLivro.setAutor(livro.getAutor());
+        newLivro.setTexto(livro.getTexto());
+    }
 }
