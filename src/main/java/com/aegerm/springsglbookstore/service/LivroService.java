@@ -40,6 +40,11 @@ public class LivroService {
         return this.repository.save(livro);
     }
 
+    public void deletarLivro(Long id) {
+        Livro livro = this.buscarLivroId(id);
+        this.repository.delete(livro);
+    }
+
     private void updateData(Livro newLivro, Livro livro) {
         newLivro.setTitulo(livro.getTitulo());
         newLivro.setAutor(livro.getAutor());

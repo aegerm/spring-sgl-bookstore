@@ -50,4 +50,10 @@ public class LivroRestService {
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(newLivro.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarLivro(@PathVariable Long id) {
+        this.service.deletarLivro(id);
+        return ResponseEntity.noContent().build();
+    }
 }
