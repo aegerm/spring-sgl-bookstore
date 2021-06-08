@@ -23,4 +23,8 @@ public class CategoriaService {
     public List<Categoria> listarCategorias() {
         return this.repository.findAll();
     }
+
+    public Categoria registrarCategoria(Categoria categoria) {
+        return this.repository.save(categoria);
+    }
 }
