@@ -48,4 +48,10 @@ public class CategoriaRestService {
         Categoria newCategoria = this.service.atualizarCategoria(id, categoriaDTO);
         return ResponseEntity.ok().body(new CategoriaDTO(newCategoria));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarCategoria(@PathVariable Long id) {
+        this.service.deletarCategoria(id);
+        return ResponseEntity.noContent().build();
+    }
 }

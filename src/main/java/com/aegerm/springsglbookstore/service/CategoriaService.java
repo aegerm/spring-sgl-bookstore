@@ -20,7 +20,6 @@ public class CategoriaService {
         Categoria categoria = this.buscarCategoriaId(id);
         categoria.setNome(categoriaDTO.getNome());
         categoria.setDescricao(categoriaDTO.getDescricao());
-
         return this.repository.save(categoria);
     }
 
@@ -35,5 +34,10 @@ public class CategoriaService {
 
     public Categoria registrarCategoria(Categoria categoria) {
         return this.repository.save(categoria);
+    }
+
+    public void deletarCategoria(Long id) {
+        this.buscarCategoriaId(id);
+        this.repository.deleteById(id);
     }
 }
