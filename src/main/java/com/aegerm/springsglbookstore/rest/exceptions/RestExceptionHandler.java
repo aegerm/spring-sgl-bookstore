@@ -1,5 +1,6 @@
 package com.aegerm.springsglbookstore.rest.exceptions;
 
+import com.aegerm.springsglbookstore.service.exceptions.DataIntegrityViolationException;
 import com.aegerm.springsglbookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,5 +16,11 @@ public class RestExceptionHandler {
     public ResponseEntity<TypeError> objectNotFoundException(ObjectNotFoundException ex, ServletRequest request) {
         TypeError error = new TypeError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<TypeError> dataIntegrityViolationException(DataIntegrityViolationException ex, ServletRequest request) {
+        TypeError error = new TypeError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }

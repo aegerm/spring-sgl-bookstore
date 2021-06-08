@@ -3,6 +3,7 @@ package com.aegerm.springsglbookstore.service;
 import com.aegerm.springsglbookstore.domain.Categoria;
 import com.aegerm.springsglbookstore.domain.dto.CategoriaDTO;
 import com.aegerm.springsglbookstore.repository.CategoriaRepository;
+import com.aegerm.springsglbookstore.service.exceptions.DataIntegrityViolationException;
 import com.aegerm.springsglbookstore.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,10 @@ public class CategoriaService {
 
     public void deletarCategoria(Long id) {
         this.buscarCategoriaId(id);
-        this.repository.deleteById(id);
+        try {
+            this.repository.deleteById(id);
+        } catch (org.springframework.dao.DataIntegrityViolationException ex) {
+            throw new DataIntegrityViolationException("Categoria possui livros associados!");
+        }
     }
 }
