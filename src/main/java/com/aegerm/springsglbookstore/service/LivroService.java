@@ -1,5 +1,6 @@
 package com.aegerm.springsglbookstore.service;
 
+import com.aegerm.springsglbookstore.domain.Categoria;
 import com.aegerm.springsglbookstore.domain.Livro;
 import com.aegerm.springsglbookstore.repository.LivroRepository;
 import com.aegerm.springsglbookstore.service.exceptions.ObjectNotFoundException;
@@ -30,6 +31,13 @@ public class LivroService {
         Livro newLivro = this.buscarLivroId(id);
         this.updateData(newLivro, livro);
         return this.repository.save(newLivro);
+    }
+
+    public Livro registrarLivro(Long categoriaId, Livro livro) {
+        livro.setId(null);
+        Categoria categoria = this.categoriaService.buscarCategoriaId(categoriaId);
+        livro.setCategoria(categoria);
+        return this.repository.save(livro);
     }
 
     private void updateData(Livro newLivro, Livro livro) {

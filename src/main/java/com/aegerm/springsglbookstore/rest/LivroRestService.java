@@ -6,7 +6,9 @@ import com.aegerm.springsglbookstore.service.LivroService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,5 +42,12 @@ public class LivroRestService {
     public ResponseEntity<Livro> atualizarLivroParcial(@PathVariable Long id, @RequestBody Livro livro) {
         Livro livroUpd = this.service.atualizarLivro(id, livro);
         return ResponseEntity.ok().body(livroUpd);
+    }
+
+    @PostMapping
+    public ResponseEntity<Livro> registrarLivro(@RequestParam(value = "categoria", defaultValue = "0") Long categoriaId, @RequestBody Livro livro){
+        Livro newLivro = this.service.registrarLivro(categoriaId, livro);
+        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(newLivro.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 }
