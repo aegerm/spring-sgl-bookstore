@@ -6,10 +6,12 @@ import com.aegerm.springsglbookstore.repository.CategoriaRepository;
 import com.aegerm.springsglbookstore.service.exceptions.DataIntegrityViolationException;
 import com.aegerm.springsglbookstore.service.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,8 +31,9 @@ public class CategoriaService {
         return categoria.orElseThrow(() -> new ObjectNotFoundException("Categoria não encontrada! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 
-    public List<Categoria> listarCategorias() {
-        return this.repository.findAll();
+    public List<Categoria> listarCategorias(Pageable pageable) {
+        List<Categoria> categorias = this.repository.findAll(pageable).stream().collect(Collectors.toList());
+        return categorias;
     }
 
     public Categoria registrarCategoria(Categoria categoria) {

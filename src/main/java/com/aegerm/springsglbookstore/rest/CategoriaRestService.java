@@ -4,6 +4,7 @@ import com.aegerm.springsglbookstore.domain.Categoria;
 import com.aegerm.springsglbookstore.domain.dto.CategoriaDTO;
 import com.aegerm.springsglbookstore.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,8 +28,9 @@ public class CategoriaRestService {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoriaDTO>> listarCategorias() {
-        List<Categoria> categorias = this.service.listarCategorias();
+    public ResponseEntity<List<CategoriaDTO>> listarCategorias(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        List<Categoria> categorias = this.service.listarCategorias(PageRequest.of(page, size));
         List<CategoriaDTO> dtoList = categorias.stream().map(CategoriaDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(dtoList);
     }
