@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/categorias")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class CategoriaRestService {
 
     private final CategoriaService service;

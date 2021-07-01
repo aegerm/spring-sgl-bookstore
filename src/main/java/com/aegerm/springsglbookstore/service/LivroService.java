@@ -17,6 +17,11 @@ public class LivroService {
     private final LivroRepository repository;
     private final CategoriaService categoriaService;
 
+    public Integer countRegistrosLivro() {
+        Integer count = this.repository.countLivro();
+        return count;
+    }
+
     public Livro buscarLivroId(Long id) {
         Optional<Livro> livro = this.repository.findById(id);
         return livro.orElseThrow(() -> new ObjectNotFoundException("Livro não encontrado! Id: " + id + ", Tipo: " + Livro.class.getName()));

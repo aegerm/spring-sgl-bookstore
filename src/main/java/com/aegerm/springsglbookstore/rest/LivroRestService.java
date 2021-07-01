@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/livros")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class LivroRestService {
 
     private final LivroService service;

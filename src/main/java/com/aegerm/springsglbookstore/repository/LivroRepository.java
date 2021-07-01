@@ -12,4 +12,7 @@ import java.util.List;
 public interface LivroRepository extends JpaRepository<Livro, Long> {
     @Query("SELECT cat FROM Livro cat WHERE cat.categoria.id = :categoriaId ORDER BY titulo")
     List<Livro> findAllByCategoria(@Param(value = "categoriaId") Long categoriaId);
+
+    @Query("SELECT COUNT(id) FROM Livro")
+    Integer countLivro();
 }

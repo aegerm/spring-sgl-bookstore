@@ -19,6 +19,11 @@ public class CategoriaService {
 
     private final CategoriaRepository repository;
 
+    public Integer countRegistrosCategoria() {
+        Integer count = this.repository.countCategoria();
+        return count;
+    }
+
     public Categoria atualizarCategoria(Long id, CategoriaDTO categoriaDTO) {
         Categoria categoria = this.buscarCategoriaId(id);
         categoria.setNome(categoriaDTO.getNome());
